@@ -46,6 +46,9 @@ inputs:
   version:
     description: Version of the app, usually commit sha works here.
     required: false
+  track:
+    description: Release track, will be added to the release name if not stable
+    required: false
 runs:
   using: docker
   image: Dockerfile
