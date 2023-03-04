@@ -15,7 +15,11 @@
     "@actions/tool-cache": "^2.0.1",
     "mustache": "^4.2.0"
   },
+  "devDependencies": {
+    "@vercel/ncc": "^0.36.1"
+  },
   "scripts": {
-    "release": "standard-version"
+    "release": "standard-version",
+    "package": "ncc build index.js -o dist"
   }
 }
