@@ -1,1 +1,3 @@
 node_modules
+*.snap.1
+actual.yml
