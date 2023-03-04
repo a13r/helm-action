@@ -31,6 +31,9 @@ inputs:
   helm:
     description: Helm binary to execute, one of [helm, helm3].
     required: false
+  helm-version:
+    description: Version of helm binary
+    required: false
   token:
     description: Github repository token. If included and the event is a deployment
       the deployment_status event will be fired.
@@ -50,5 +53,5 @@ inputs:
     description: Release track, will be added to the release name if not stable
     required: false
 runs:
-  using: docker
-  image: Dockerfile
+  using: node16
+  main: 'index.js'

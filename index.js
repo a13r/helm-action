@@ -1,6 +1,7 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 const exec = require("@actions/exec");
+const tc = require("@actions/tool-cache");
 const fs = require("fs");
 const util = require("util");
 const Mustache = require("mustache");
@@ -8,6 +9,35 @@ const Mustache = require("mustache");
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
 const required = { required: true };
+
+const baseDownloadURL = "https://get.helm.sh/helm";
+const fallbackVersion = "3.11.1";
+
+async function downloadDoctl(version) {
+  if (process.platform === 'win32') {
+      const doctlDownload = await tc.downloadTool(`${baseDownloadURL}-v${version}-windows-amd64.zip`);
+      return tc.extractZip(doctlDownload);
+  }
+  if (process.platform === 'darwin') {
+      const doctlDownload = await tc.downloadTool(`${baseDownloadURL}-v${version}-darwin-amd64.tar.gz`);
+      return tc.extractTar(doctlDownload);
+  }
+  const doctlDownload = await tc.downloadTool(`${baseDownloadURL}-v${version}-linux-amd64.tar.gz`);
+  return tc.extractTar(doctlDownload);
+}
+
+async function addHelmToPath(version) {
+  if (version.charAt(0) === 'v') {
+    version = version.substr(1);
+  }
+  var path = tc.find("helm", version);
+  if (!path) {
+      const installPath = await downloadDoctl(version);
+      path = await tc.cacheDir(installPath, 'helm', version);
+  }
+  core.addPath(path);
+  core.info(`>>> helm version v${version} installed to ${path}`);
+}
 
 /**
  * Status marks the deployment status. Only activates if token is set as an
@@ -169,6 +199,7 @@ async function run() {
     const dryRun = core.getInput("dry-run");
     const secrets = getSecrets(core.getInput("secrets"));
     const atomic = getInput("atomic") || true;
+    const helmVersion = getInput("helm-version") || fallbackVersion;
     const helm = "helm";
 
     core.debug(`param: track = "${track}"`);
@@ -188,6 +219,7 @@ async function run() {
     core.debug(`param: repository = "${repository}"`);
     core.debug(`param: atomic = "${atomic}"`);
 
+    await addHelmToPath(helmVersion);
 
     // Setup command options and arguments.
     const args = [
