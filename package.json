@@ -9,10 +9,10 @@
     "url": "https://github.com/deliverybot"
   },
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/exec": "^1.0.0",
-    "@actions/github": "^1.0.0",
-    "mustache": "^3.0.3"
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1",
+    "mustache": "^4.2.0"
   },
   "scripts": {
     "release": "standard-version"

@@ -1,27 +1,19 @@
-FROM alpine:3.10.2
+FROM node:lts
 
-ENV BASE_URL="https://get.helm.sh"
+ENV HELM_FILE="https://get.helm.sh/helm-v3.11.1-linux-amd64.tar.gz"
+ENV HELM_CHECKSUM="0b1be96b66fab4770526f136f5f1a385a47c41923d33aab0dcb500e0f6c1bf7c"
 
-ENV HELM_2_FILE="helm-v2.17.0-linux-amd64.tar.gz"
-ENV HELM_3_FILE="helm-v3.4.2-linux-amd64.tar.gz"
+RUN wget ${HELM_FILE} -O helm.tar.gz && \
+    # note the two spaces between checksum and file name, this is important
+    echo "${HELM_CHECKSUM}  helm.tar.gz" | sha256sum -c && \
+    tar xf helm.tar.gz linux-amd64/helm && \
+    cp linux-amd64/helm /usr/local/bin/helm && \
+    rm -rf linux-amd64
 
-RUN apk add --no-cache ca-certificates \
-    --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
-    jq curl bash nodejs aws-cli && \
-    # Install helm version 2:
-    curl -L ${BASE_URL}/${HELM_2_FILE} |tar xvz && \
-    mv linux-amd64/helm /usr/bin/helm && \
-    chmod +x /usr/bin/helm && \
-    rm -rf linux-amd64 && \
-    # Install helm version 3:
-    curl -L ${BASE_URL}/${HELM_3_FILE} |tar xvz && \
-    mv linux-amd64/helm /usr/bin/helm3 && \
-    chmod +x /usr/bin/helm3 && \
-    rm -rf linux-amd64 && \
-    # Init version 2 helm:
-    helm init --client-only
+WORKDIR /usr/src/
+COPY package.json .
+COPY package-lock.json .
+RUN npm install
+COPY index.js .
 
-ENV PYTHONPATH "/usr/lib/python3.8/site-packages/"
-
-COPY . /usr/src/
 ENTRYPOINT ["node", "/usr/src/index.js"]
