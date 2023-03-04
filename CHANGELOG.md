@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/a13r/helm-action/compare/v1.0.1...v1.1.0) (2023-03-04)
+
+
+### Features
+
+* use node16 runner ([6527893](https://github.com/a13r/helm-action/commit/6527893432c0e07e90f7908a8de18afc900f2b49))
+
 ## [1.0.1](https://github.com/a13r/helm-action/compare/v1.0.0...v1.0.1) (2023-03-04)
 
 
