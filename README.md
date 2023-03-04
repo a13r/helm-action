@@ -31,7 +31,6 @@ payload if the action was triggered by a deployment.
   JSON encoded array or a string.
 - `secrets`: Secret variables to include in value file interpolation. Expects a
   JSON encoded map.
-- `helm`: Helm binary to execute, one of: [`helm`, `helm3`].
 - `version`: Version of the app, usually commit sha works here.
 - `timeout`: specify a timeout for helm deployment
 - `repository`: specify the URL for a helm repo to come from
@@ -43,8 +42,7 @@ action will execute a `helm delete $service`
 
 #### Versions
 
-- `helm`: v2.16.1
-- `helm3`: v3.0.0
+- `helm`: v3.11.1
 
 ### Environment
 
