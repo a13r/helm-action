@@ -1,6 +1,5 @@
 #!/bin/bash
 
-INPUT_HELM=helm3 \
 INPUT_TOKEN=foo \
 INPUT_SECRETS='{"secret": "val"}' \
 INPUT_CHART=app \
