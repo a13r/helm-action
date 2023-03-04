@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.1](https://github.com/a13r/helm-action/compare/v1.0.0...v1.0.1) (2023-03-04)
+
+
+### Bug Fixes
+
+* add missing track input in action.yml ([4a8efd4](https://github.com/a13r/helm-action/commit/4a8efd42c25e0668e1b37e848f8842144478941d))
+* always use helm as command name ([d05331c](https://github.com/a13r/helm-action/commit/d05331c12cb7f3a7c18f8aa830717a9cb374b00a))
+
 ## 1.0.0 (2023-03-04)
 
 
