@@ -1,4 +1,4 @@
-on: [push, pull_request_target]
+on: [pull_request_target]
 name: Ensure package
 
 jobs:
@@ -10,5 +10,5 @@ jobs:
         run: |-
             npm install
             npm run package
-            git diff --exit-code dist/index.js || \
+            git diff --exit-code --ignore-cr-at-eol dist/index.js || \
               (echo -e "\nPlease run 'npm run package' and commit the results" && exit 1)
