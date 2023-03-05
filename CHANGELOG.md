@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.1](https://github.com/a13r/helm-action/compare/v1.1.0...v1.1.1) (2023-03-05)
+
+
+### Bug Fixes
+
+* ignore cr at eol in test ([3176eaa](https://github.com/a13r/helm-action/commit/3176eaa3bafd72662b43b012ec877f72631ccfd1))
+* package index.js to dist ([e204bd8](https://github.com/a13r/helm-action/commit/e204bd8fe25e9cc459493afa93897092b7770a36))
+* update dist and package-lock.json ([6b7619a](https://github.com/a13r/helm-action/commit/6b7619aaa5fa0870b139ed7990aa0f682aa8451b))
+
 ## [1.1.0](https://github.com/a13r/helm-action/compare/v1.0.1...v1.1.0) (2023-03-04)
 
 
