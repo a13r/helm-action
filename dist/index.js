@@ -14628,6 +14628,7 @@ async function run() {
     const dryRun = core.getInput("dry-run");
     const secrets = getSecrets(core.getInput("secrets"));
     const atomic = getInput("atomic") || true;
+    const debug = getInput("debug") || false;
     const helmVersion = getInput("helm-version") || fallbackVersion;
     const helm = "helm";
 
@@ -14688,6 +14689,10 @@ async function run() {
     // If true upgrade process rolls back changes made in case of failed upgrade.
     if (atomic === true) {
       args.push("--atomic");
+    }
+
+    if (debug) {
+      args.push("--debug");
     }
 
     // Setup necessary files.
