@@ -52,6 +52,9 @@ inputs:
   track:
     description: Release track, will be added to the release name if not stable
     required: false
+  debug:
+    description: Enable verbose output
+    required: false
 runs:
   using: node16
   main: 'dist/index.js'
